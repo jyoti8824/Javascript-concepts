@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Catalog</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #e9f5f5; /* Light teal background */
+            color: #333; /* Darker text color */
+        }
+
+        h1 {
+            text-align: center;
+            color: #00796b; /* Teal color for the heading */
+            margin-bottom: 20px;
+            font-size: 2.5rem;
+            letter-spacing: 1px;
+        }
+
+        /* Button Styles */
+        button {
+            padding: 12px 20px;
+            margin: 5px;
+            border: none;
+            border-radius: 8px;
+            background-color: #00796b; /* Teal background */
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Soft shadow */
+        }
+
+        button:hover {
+            background-color: #004d40; /* Darker teal on hover */
+            transform: translateY(-2px); /* Slight lift on hover */
+        }
+
+        /* Book List Styles */
+        #book-list {
+            margin-top: 20px;
+        }
+
+        .book-item {
+            border: 1px solid #b2dfdb; /* Light teal border */
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            background-color: white; /* White background for book items */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+            transition: box-shadow 0.3s;
+        }
+
+        .book-item:hover {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow on hover */
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            button {
+                width: 100%; /* Full width buttons on small screens */
+                margin: 5px 0; /* Margin adjustments */
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Library Catalog</h1>
+    <div>
+        <button onclick="addBook()">Add a Book</button>
+        <button onclick="removeBook()">Remove a Book</button>
+        <button onclick="searchBooks()">Search Books</button>
+    </div>
+    <div id="book-list"></div>
+
+    <script>
+        let library = [
+            { title: "To Kill a Mockingbird", author: "Harper Lee", year: 1960 },
+            { title: "1984", author: "George Orwell", year: 1949 },
+            { title: "Pride and Prejudice", author: "Jane Austen", year: 1813 }
+        ];
+
+        function displayBooks() {
+            const bookList = document.getElementById('book-list');
+            bookList.innerHTML = '';
+            library.forEach(book => {
+                const bookElement = document.createElement('div');
+                bookElement.className = 'book-item';
+                bookElement.textContent = `${book.title} by ${book.author} (${book.year})`;
+                bookList.appendChild(bookElement);
+            });
+        }
+
+        function addBook() {
+            const title = prompt("Enter the book title:");
+            const author = prompt("Enter the author's name:");
+            const year = parseInt(prompt("Enter the publication year:"));
+            
+            if (title && author && !isNaN(year)) {
+                library.push({ title, author, year });
+                displayBooks();
+            } else {
+                alert("Invalid input. Book not added.");
+            }
+        }
+
+        function removeBook() {
+            const title = prompt("Enter the title of the book to remove:");
+            const index = library.findIndex(book => book.title.toLowerCase() === title.toLowerCase());
+            
+            if (index !== -1) {
+                library.splice(index, 1);
+                displayBooks();
+            } else {
+                alert("Book not found in the library.");
+            }
+        }
+
+        function searchBooks() {
+            const searchTerm = prompt("Enter a search term (title or author):").toLowerCase();
+            const results = library.filter(book => 
+                book.title.toLowerCase().includes(searchTerm) || 
+                book.author.toLowerCase().includes(searchTerm)
+            );
+            
+            if (results.length > 0) {
+                alert(`Found ${results.length} book(s):\n${results.map(book => book.title).join(', ')}`);
+            } else {
+                alert("No books found matching the search term.");
+            }
+        }
+
+        displayBooks();
+    </script>
+</body>
+</html>

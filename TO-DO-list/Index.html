@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive To-Do List</title>
+    <style>
+        /* General Reset */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Body Styling */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #f0f4f8; 
+            color: #495057;
+        }
+
+        /* Headings */
+        h1 {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #f9f9fa;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+            background: linear-gradient(to right, #659cd6, #032543be);
+            padding: 10px; /* Added padding */
+            border-radius: 10px; /* Rounded corners */
+        }
+
+        /* Input and Button Container */
+        div {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        /* Input Field */
+        #todo-input {
+            flex-grow: 1;
+            padding: 15px; 
+            font-size: 16px;
+            border: 2px solid #ced4da;
+            border-radius: 5px;
+            margin-right: 10px;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        #todo-input:focus {
+            border-color: #28a745;
+        }
+
+        /* Button */
+        button {
+            padding: 15px 20px; 
+            font-size: 16px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #218838;
+            transform: scale(1.05);
+        }
+
+        /* To-Do List Styles */
+        #todo-list {
+            list-style-type: none;
+            padding: 0;
+            margin-top: 20px;
+        }
+
+        #todo-list li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: white;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        #todo-list li:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        #todo-list li span {
+            flex-grow: 1;
+            font-size: 16px;
+            color: #495057;
+        }
+
+        #todo-list li button {
+            background-color: #dc3545;
+            padding: 8px 12px;
+            font-size: 14px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        #todo-list li button:hover {
+            background-color: #c82333;
+            transform: scale(1.05); 
+        }
+
+        /* JavaScript Summary Section */
+        .summary {
+            padding: 20px;
+            background-color: #ffffff;
+            border: 2px solid #ced4da;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+            margin-top: 20px;/* Added margin above the summary */
+            transition: transform 0.3s ease; /* Added transition */
+        }
+
+        .summary:hover {
+            transform: scale(1.02); /* Slightly enlarges the summary section on hover */
+        }
+
+        .summary h2 {
+            font-size: 1.75rem;
+            margin-bottom: 15px;
+            color: #343a40;
+            text-align: center;
+            line-height: 1.5; /* Reduced line height for better spacing */
+        }
+
+        .summary ul {
+            padding-left: 20px;
+            margin-top: 10px; 
+        }
+
+        .summary ul li {
+            font-size: 1rem;
+            margin-bottom: 5px;
+            color: #495057;
+            position: relative;
+            padding-left: 15px; 
+        }
+
+        .summary ul li:before {
+            content: "✔"; 
+            position: absolute;
+            left: 0;
+            color: #28a745; 
+        }
+    </style>
+</head>
+<body>
+    <h1>My To-Do List</h1>
+    <div>
+        <input type="text" id="todo-input" placeholder="Enter a new task">
+        <button onclick="addTodo()">Add Task</button>
+    </div>
+
+    <ul id="todo-list"></ul>
+
+    <!-- JavaScript Summary Section -->
+    <div class="summary">
+        <h2>JavaScript Topics Covered</h2>
+        <ul type="none">
+            <li><strong>DOM Manipulation:</strong> Creating, modifying, and removing elements dynamically using JavaScript.</li>
+            <li><strong>Event Handling:</strong> Attaching click events to buttons and handling input form submissions.</li>
+            <li><strong>Conditional Logic:</strong> Using <code>if</code> statements to ensure valid input before performing actions.</li>
+            <li><strong>Functions:</strong> Reusable functions like <code>addTodo()</code> and <code>removeTodo()</code> to keep the code organized.</li>
+            <li><strong>String Methods:</strong> Using <code>trim()</code> to clean up user input by removing extra spaces.</li>
+        </ul>
+    </div>
+
+    <script>
+        function addTodo() {
+            const input = document.getElementById("todo-input");
+            const list = document.getElementById("todo-list");
+
+            if (input.value.trim() !== '') {
+                const li = document.createElement("li");
+                li.innerHTML = `<span>${input.value}</span>
+                                <button onclick="removeTodo(this)">Remove</button>`;
+                list.appendChild(li);
+                input.value = '';
+            }
+        }
+
+        function removeTodo(button) {
+            const li = button.parentNode;
+            li.parentNode.removeChild(li);
+        }
+    </script>
+</body>
+</html>

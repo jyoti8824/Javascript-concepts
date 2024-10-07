@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selecting and Modifying Elements</title>
+    <style>
+        h1{
+            margin-top: 10%;
+            text-align: center;
+            background-color: black;
+            color: white;
+            padding: 20px;
+        }
+        .container{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        button{
+            background-color: rgb(232, 35, 35);
+            border-radius: 5px ;
+            padding: 10px;
+            border: 1px solid rgb(100, 10, 10);
+            color: white;
+        }
+        #myDiv {
+            color: white;
+            width: 300px;
+            height: 200px;
+            background: linear-gradient(to right, #ff7e5f, #feb47b);
+            border: 1px solid #007bff;
+            text-align: center;
+            line-height: 200px;
+            margin: 20px auto;
+            transition: background 0.3s ease;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1 id="h">Element Selection and Modification</h1>
+    <div id="myDiv">Click on button!</div>
+    <div class="container">
+        <button id="changeButton">Change Text & Color</button>
+    </div>
+
+    <script>
+        const div = document.getElementById("myDiv");
+        const head = document.getElementById("h");
+        const button = document.getElementById("changeButton");
+
+        button.addEventListener("click", function() {
+            div.textContent = "Text & Color Changed!";
+            div.style.background = "linear-gradient(to left, #6a11cb, #2575fc)";
+            head.style.backgroundColor = "#ffffff";
+            head.style.color = "black";
+        });
+    </script>
+</body>
+</html>

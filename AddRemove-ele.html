@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adding and Removing Elements</title>
+    <style>
+        div{
+            text-align: center;
+            margin-top: 8%;
+        }
+        #itemList {
+            list-style-type: none;
+            padding: 0;
+            max-width: 300px;
+            margin: 20px auto;
+        }
+
+        #itemList li {
+            background: #f8f9fa;
+            margin: 5px 0;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid #ced4da;
+        }
+
+        button.remove {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div>
+    <h1>Adding and Removing Items</h1>
+    <input type="text" id="itemInput" placeholder="Enter an item">
+    <button onclick="addItemm()">Add Item</button>
+    </div>
+    <ul id="itemList"></ul>
+
+    <script>
+        function addItemm(){
+        const AppendUL = document.getElementById("itemList");
+        const Input = document.getElementById("itemInput");
+            if(Input.value.trim() !== ''){
+                const li = document.createElement("li");
+                li.innerHTML = `<span>${Input.value}</span> 
+                <button onclick="Remove(this)" class="remove" >Remove</button>`;
+                AppendUL.appendChild(li);
+                Input.value = '';
+            }
+        }
+            function Remove(button){
+                const li = button.parentNode;
+                li.parentNode.removeChild(li);
+            }
+        
+    </script>
+</body>
+</html>

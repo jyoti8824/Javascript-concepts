@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Event Handler Example</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f0f0f0;
+            color: #333;
+        }
+        h1 {
+            color: #007BFF;
+            text-align: center;
+            font-size: 3em;
+            background: linear-gradient(to right, #05284e, #0056b3);
+            -webkit-background-clip: text;
+            color: transparent;
+            display: inline-block;
+            animation: shrink 3s forwards;
+        }
+        @keyframes shrink {
+            from {
+                font-size: 3em;
+            }
+            to {
+                font-size: 1.5em;
+            }
+        }
+        .showcase {
+            text-align: center;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background: linear-gradient(to right, #05284e, #0056b3);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 10px;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        input[type="text"] {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: calc(100% - 22px);
+            margin-top: 10px;
+        }
+        #message {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #333;
+            text-align: center;
+        }
+    </style>
+    <script src="HandleEvent.js"></script>
+</head>
+<body>
+    <h1>Event Handler Example</h1>
+    <div class="showcase">
+        <button onclick="showMessage()">Click Me</button>
+        <button onmouseover="showMouseOverMessage()" onmouseout="showMouseOutMessage()">Mouse Over Me</button>
+        <button ondblclick="showDoubleClickMessage()">Double Click Me</button>
+        <input type="text" onkeypress="showKeyPressMessage(event)" onkeydown="showKeyDownMessage(event)" onchange="showChangeMessage()" placeholder="Type something...">
+        <p id="message"></p>
+    </div>
+</body>
+</html>
